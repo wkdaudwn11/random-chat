@@ -1,6 +1,7 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import io from "socket.io-client";
+import { Link } from "react-router-dom";
 import { getName } from "../utils/commons";
 
 const socket = io("http://192.168.0.11:4000");
@@ -36,7 +37,7 @@ export default class Message extends React.Component {
   }
 
   keyboard(e) {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       const messageObject = {
         name: this.state.yourID,
         body: this.state.message,
@@ -60,7 +61,7 @@ export default class Message extends React.Component {
 
   componentWillMount() {
     socket.on("connect", () => {
-      socket.emit("room", "room01");
+      socket.emit("room", "room");
       socket.emit("count");
       socket.on("message", (message) => {
         this.receiveMessage(message);
@@ -74,6 +75,13 @@ export default class Message extends React.Component {
     return (
       <div style={{ padding: 20 }}>
         <h1>익명 채팅</h1>
+
+        <h4>
+          현재 닉네임: {this.state.yourID}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Link to="set-name">
+            <button>이름 변경</button>
+          </Link>
+        </h4>
 
         <TextField
           id="outlined-basic"
