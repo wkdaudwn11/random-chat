@@ -23,14 +23,14 @@ const io = require("socket.io")(http, {
 
 io.on("connection", function (socket) {
   socket.on("room", function (user_id) {
-    socket.join("room01", () => {
+    socket.join("room", () => {
       console.log(user_id + "방입장");
     });
   });
 
   socket.on("send message", (messageObject) => {
     console.log(`${messageObject.name}: ${messageObject.body}`);
-    io.to("room01").emit(
+    io.to("room").emit(
       "message",
       `${messageObject.name}: ${messageObject.body}`
     );
