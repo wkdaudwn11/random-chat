@@ -61,8 +61,7 @@ export default class Message extends React.Component {
 
   componentWillMount() {
     socket.on("connect", () => {
-      socket.emit("room", "room");
-      socket.emit("count");
+      socket.emit("room", "room01");
       socket.on("message", (message) => {
         this.receiveMessage(message);
         this.setMessageBoxScroll();
