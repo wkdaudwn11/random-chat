@@ -4,7 +4,8 @@ import io from "socket.io-client";
 import { Link } from "react-router-dom";
 import { getName } from "../utils/commons";
 
-const socket = io("http://192.168.0.11:4000");
+const PUBLIC_IP = "192.168.0.11";
+const socket = io(`http://${PUBLIC_IP}:4000`);
 
 export default class Message extends React.Component {
   MAX_SCROLL_HEIGHT = 500;
